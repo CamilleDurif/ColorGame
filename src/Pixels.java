@@ -6,13 +6,17 @@ public class Pixels {
 	
 	private int height;
 	private int width;
+	private int size;
+	private int count;
 	
-	public Pixels(int x, int y){
+	public Pixels(int x, int y, int z, int count){
 		
 		colors = new Color[x][y];
 		
-		this.setHeight(x);
-		this.setWidth(y);
+		this.height = x;
+		this.width = y;
+		this.size = z;
+		this.count = count;
 		 		
 		initColors();
 		
@@ -55,9 +59,7 @@ public class Pixels {
 					return false;
 			}
 		}
-		
 		return true;
-		
 	}
 	
 	public void setColor(Color newcolor){
@@ -69,7 +71,7 @@ public class Pixels {
 		
 		for(int i=0;i<height;i++){
 			for(int j=0;j<width;j++){
-				int rand = (int)(Math.random()*4);
+				int rand = (int)(Math.random()*6);
 				switch(rand){
 				case 0:
 					this.colors[i][j] = Mycolors.blue.getColor();
@@ -82,6 +84,12 @@ public class Pixels {
 					break;
 				case 3:
 					this.colors[i][j] = Mycolors.orange.getColor();
+					break;
+				case 4:
+					this.colors[i][j] = Mycolors.yellow.getColor();
+					break;
+				case 5:
+					this.colors[i][j] = Mycolors.purple.getColor();
 					break;
 				}
 			}
@@ -115,6 +123,30 @@ public class Pixels {
 
 	public void setWidth(int width) {
 		this.width = width;
+	}
+
+
+
+	public int getSize() {
+		return size;
+	}
+
+
+
+	public void setSize(int size) {
+		this.size = size;
+	}
+
+
+
+	public int getCount() {
+		return count;
+	}
+
+
+
+	public void setCount(int count) {
+		this.count = count;
 	}
 	
 

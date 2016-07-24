@@ -2,10 +2,12 @@ import java.awt.Color;
 
 public enum Mycolors {
 
-	blue (new Color(0,0,150)),
-	green (new Color(120,220,50)), 
-	red (new Color(250,0,0)),
-	orange (new Color(250,250,50));
+	blue (new Color(108,166,233)),
+	green (new Color(147,247,204)), 
+	red (new Color(247,147,147)),
+	orange (new Color(255,168,110)),
+	purple (new Color(225,171,255)),
+	yellow (new Color(255,253,171));
 	
 	private final Color color;
 	

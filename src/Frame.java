@@ -1,13 +1,18 @@
+import java.awt.CardLayout;
 import java.awt.Dimension;
+
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
 public class Frame extends JFrame{
 	
-	//private CardLayout cl;
-	//private JPanel content;
+	private CardLayout cl;
+	private JPanel content;
 	
 	private Board board;
+	private Menu menu;
+	private GameOver gameover;
 	
 	public Frame(){
 				
@@ -18,12 +23,36 @@ public class Frame extends JFrame{
 		setResizable(false);
 		setFocusable(true);
 		
-		//cl = new CardLayout();
-		//content = new JPanel();
+		cl = new CardLayout();
+		content = new JPanel();
+		content.setLayout(cl);
 		
 		board = new Board();
+		menu = new Menu();
 		
-		this.add(board);
+		content.add(menu, "Menu");
+		this.getContentPane().add(content);
+		
+	}
+	
+	public void newGame(){
+		
+		content.add(board, "Board");
+		cl.show(content, "Board");
+		
+	}
+	
+	public void gameOver(){
+		
+		gameover = new GameOver();
+		content.add(gameover, "GameOver");
+		cl.show(content, "GameOver");
+		
+	}
+	
+	public void menu(){
+		
+		cl.show(content, "Menu");
 		
 	}
 
