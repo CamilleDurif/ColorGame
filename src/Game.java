@@ -3,7 +3,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 
-import javax.swing.JButton;
+import javax.swing.AbstractButton;
 
 public class Game implements ActionListener{
 
@@ -13,6 +13,10 @@ public class Game implements ActionListener{
 	private Pixels pixels;
 	
 	private int count;
+	private String difficulty;
+	private int nbofplayers;
+	
+	private String name;
 	
 	public Game(){
 		
@@ -21,13 +25,14 @@ public class Game implements ActionListener{
 		frame = new Frame();
 		frame.setVisible(true);
 
+		difficulty = "easy";
 		//count = 20;
 		
 	}
 	
 	public void checkWin(){
 		
-		if(pixels.getCount() <= 0 || pixels.isWinning())
+		if((pixels.getCount() <= 0 && nbofplayers == 1) || pixels.isWinning())
 			frame.gameOver();
 		
 	}
@@ -35,10 +40,43 @@ public class Game implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e){
 		
-		String name = (((JButton)e.getSource()).getName());
+		String bname = (((AbstractButton)e.getSource()).getName());
+		name = bname;
+		
+		if(bname == "blue" || bname == "green" || bname == "red" || bname == "orange" || bname == "purple" || bname == "yellow")
+			commandbutton();
+		
+		else
+			menubutton();
+	}
+	
+	public void menubutton(){
 		
 		if(name == "easy" || name == "medium" || name == "hard")
-			setLevel(name);
+			difficulty = name;
+		
+		if(name == "oneplayer"){
+			nbofplayers = 1;
+			setLevel(difficulty);
+		}
+		
+		if(name == "twoplayers"){
+			nbofplayers = 2;
+			setLevel(difficulty);
+			pixels.setCount(1);
+		}
+		
+		if(name == "threeplayers"){
+			nbofplayers = 3;
+			setLevel(difficulty);
+			pixels.setCount(1);
+		}
+		
+		if(name == "fourplayers"){
+			nbofplayers = 4;
+			setLevel(difficulty);
+			pixels.setCount(1);
+		}
 		
 		if(name == "tryagain"){
 			pixels.setCount(count);
@@ -48,14 +86,16 @@ public class Game implements ActionListener{
 		
 		if(name == "menu"){
 			frame.menu();
-			count = 20;
 		}
 		
 		if(name == "exit")
 			frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
 		
-		Color oldcolor = pixels.getColors()[0][0];
+	}
+	
+	public void commandbutton(){
 		
+
 		Color newcolor;
 		
 		switch(name){
@@ -78,25 +118,111 @@ public class Game implements ActionListener{
 			newcolor = Mycolors.yellow.getColor();
 			break;
 		default:
-			newcolor = oldcolor;
+			newcolor = Mycolors.blue.getColor();
 			break;
 		}
 		
-		if(oldcolor == newcolor)
-			return;
+		Color oldcolor;
 		
-		pixels.checkAdj(newcolor, oldcolor, 0, 0);
-		pixels.setColor(newcolor);
+		if(nbofplayers == 1){
+			oldcolor = pixels.getColors()[0][0];
+			if(oldcolor == newcolor)
+				return;
+			pixels.checkAdj(newcolor, oldcolor, 0, 0);
+			pixels.setColor(newcolor, 0, 0);
+			//TODO
+			//pourquoi ?
+			pixels.setCount(pixels.getCount()-1);
+		}
+		
+		if(nbofplayers == 2){
+			if(pixels.getCount() == 1){
+				oldcolor = pixels.getColors()[0][0];
+				if(oldcolor == newcolor)
+					return;
+				pixels.checkAdj(newcolor, oldcolor, 0, 0);
+				pixels.setColor(newcolor, 0, 0);
+				pixels.setCount(pixels.getCount()+1);
+			}
+			else{
+				oldcolor = pixels.getColors()[pixels.getHeight()-1][pixels.getWidth()-1];
+				if(oldcolor == newcolor)
+					return;
+				pixels.checkAdj(newcolor, oldcolor, pixels.getHeight()-1, pixels.getWidth()-1);
+				pixels.setColor(newcolor, pixels.getHeight()-1, pixels.getWidth()-1);
+				pixels.setCount(pixels.getCount()-1);
+			}
+		}
+		
+		if(nbofplayers == 3){
+			if(pixels.getCount() == 1){
+				oldcolor = pixels.getColors()[0][0];
+				if(oldcolor == newcolor)
+					return;
+				pixels.checkAdj(newcolor, oldcolor, 0, 0);
+				pixels.setColor(newcolor, 0, 0);
+				pixels.setCount(pixels.getCount()+1);
+			}
+			else if(pixels.getCount() == 2){
+				oldcolor = pixels.getColors()[pixels.getHeight()-1][pixels.getWidth()-1];
+				if(oldcolor == newcolor)
+					return;
+				pixels.checkAdj(newcolor, oldcolor, pixels.getHeight()-1, pixels.getWidth()-1);
+				pixels.setColor(newcolor, pixels.getHeight()-1, pixels.getWidth()-1);
+				pixels.setCount(pixels.getCount()+1);
+			}
+			else{
+				oldcolor = pixels.getColors()[pixels.getHeight()-1][0];
+				if(oldcolor == newcolor)
+					return;
+				pixels.checkAdj(newcolor, oldcolor, pixels.getHeight()-1, 0);
+				pixels.setColor(newcolor, pixels.getHeight()-1, 0);
+				pixels.setCount(1);
+			}
+		}
+		
+		if(nbofplayers == 4){
+			if(pixels.getCount() == 1){
+				oldcolor = pixels.getColors()[0][0];
+				if(oldcolor == newcolor)
+					return;
+				pixels.checkAdj(newcolor, oldcolor, 0, 0);
+				pixels.setColor(newcolor, 0, 0);
+				pixels.setCount(pixels.getCount()+1);
+			}
+			else if(pixels.getCount() == 2){
+				oldcolor = pixels.getColors()[pixels.getHeight()-1][pixels.getWidth()-1];
+				if(oldcolor == newcolor)
+					return;
+				pixels.checkAdj(newcolor, oldcolor, pixels.getHeight()-1, pixels.getWidth()-1);
+				pixels.setColor(newcolor, pixels.getHeight()-1, pixels.getWidth()-1);
+				pixels.setCount(pixels.getCount()+1);
+			}
+			else if(pixels.getCount() == 3){
+				oldcolor = pixels.getColors()[pixels.getHeight()-1][0];
+				if(oldcolor == newcolor)
+					return;
+				pixels.checkAdj(newcolor, oldcolor, pixels.getHeight()-1, 0);
+				pixels.setColor(newcolor, pixels.getHeight()-1, 0);
+				pixels.setCount(pixels.getCount()+1);
+			}
+			else{
+				oldcolor = pixels.getColors()[0][pixels.getWidth()-1];
+				if(oldcolor == newcolor)
+					return;
+				pixels.checkAdj(newcolor, oldcolor, 0, pixels.getWidth()-1);
+				pixels.setColor(newcolor, 0, pixels.getWidth()-1);
+				pixels.setCount(1);
+			}
+		}
+		
 		frame.validate();
 		frame.repaint();
 		
 		
 		
-		//TODO
-		//pourquoi ?
-		pixels.setCount(pixels.getCount()-1);;
-		
 		checkWin();
+		
 	}
 	
 	public void setLevel(String difficulty){
@@ -128,6 +254,10 @@ public class Game implements ActionListener{
 	
 	public int getCount(){
 		return count;
+	}
+	
+	public int getNbofplayers(){
+		return nbofplayers;
 	}
 	
 }

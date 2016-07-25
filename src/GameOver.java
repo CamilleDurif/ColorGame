@@ -24,7 +24,17 @@ public class GameOver extends JPanel{
 		JLabel winlab = new JLabel("You win !");
 		JLabel looselab = new JLabel("You loose...");
 		
-		if(Game.getGame().getPixels().isWinning())
+		int winner = Game.getGame().getPixels().getCount();
+		if(winner == 1)
+			winner = Game.getGame().getNbofplayers();
+		else
+			winner--;
+		
+		JLabel playerwin = new JLabel("Player " + winner + " win !!");
+		
+		if(Game.getGame().getPixels().isWinning() && Game.getGame().getNbofplayers() > 1)
+			this.add(playerwin, c);
+		else if(Game.getGame().getPixels().isWinning())
 			this.add(winlab, c);
 		else
 			this.add(looselab, c);

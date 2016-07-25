@@ -11,7 +11,11 @@ public class GameBoard extends JPanel{
 		
 		g.setFont(new Font("Tahoma", Font.BOLD, 15));
 		g.setColor(Color.GRAY);
-		g.drawString("Action left : " + Game.getGame().getPixels().getCount(), 15, 20);
+		if(Game.getGame().getNbofplayers() == 1)
+			g.drawString("Action left : " + Game.getGame().getPixels().getCount(), 15, 20);
+		else
+			g.drawString("Player " + Game.getGame().getPixels().getCount() + " turn", 15, 20);
+
 				
 		int i=0;
 		int j=0;
@@ -25,6 +29,25 @@ public class GameBoard extends JPanel{
 			}
 		}
 		
+		g.setColor(new Color(0,0,0,50));
+
+		if(Game.getGame().getNbofplayers() == 4){
+			g.drawString("4", size + size/2, Game.getGame().getPixels().getWidth()*size + size/2);
+			g.drawString("3", Game.getGame().getPixels().getHeight()*size + size/2, size+size/2);
+			g.drawString("2", Game.getGame().getPixels().getHeight()*size + size/2, Game.getGame().getPixels().getWidth()*size + size/2);
+			g.drawString("1", size + size/2, size + size/2);
+		}
+
+		if(Game.getGame().getNbofplayers() == 3){
+			g.drawString("3", Game.getGame().getPixels().getHeight()*size + size/2, size+size/2);
+			g.drawString("2", Game.getGame().getPixels().getHeight()*size + size/2, Game.getGame().getPixels().getWidth()*size + size/2);
+			g.drawString("1", size + size/2, size + size/2);
+		}
+		
+		if(Game.getGame().getNbofplayers() == 2){
+			g.drawString("2", Game.getGame().getPixels().getHeight()*size + size/2, Game.getGame().getPixels().getWidth()*size + size/2);
+			g.drawString("1", size + size/2, size + size/2);
+		}
 		
 	}
 

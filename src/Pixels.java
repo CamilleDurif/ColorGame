@@ -20,9 +20,7 @@ public class Pixels {
 		 		
 		initColors();
 		
-	}
-	
-	
+	}	
 	
 	public void checkAdj(Color newcolor, Color oldcolor, int i, int j){
 		
@@ -62,8 +60,8 @@ public class Pixels {
 		return true;
 	}
 	
-	public void setColor(Color newcolor){
-		colors[0][0] = newcolor;
+	public void setColor(Color newcolor, int x, int y){
+		colors[x][y] = newcolor;
 	}
 	
 	
