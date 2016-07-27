@@ -13,9 +13,7 @@ public class Button extends JButton{
 		this.setBackground(color);
 		this.setPreferredSize(new Dimension(90,40));
 		this.setName(name);
-		
 		this.addActionListener(Game.getGame());
-		
 		this.setFocusable(false);
 		
 	}
@@ -27,11 +25,8 @@ public class Button extends JButton{
 		this.setBackground(color);
 		this.setPreferredSize(new Dimension(90,40));
 		this.setName(name);
-		
 		this.setText(text);
-		
 		this.addActionListener(Game.getGame());
-		
 		this.setFocusable(false);
 		
 	}

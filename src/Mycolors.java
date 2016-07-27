@@ -7,7 +7,8 @@ public enum Mycolors {
 	red (new Color(247,147,147)),
 	orange (new Color(255,168,110)),
 	purple (new Color(225,171,255)),
-	yellow (new Color(255,253,171));
+	yellow (new Color(255,253,171)),
+	greyblue (new Color(239,239,239));
 	
 	private final Color color;
 	

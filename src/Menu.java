@@ -1,4 +1,7 @@
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -16,8 +19,11 @@ public class Menu extends JPanel{
 		
 		super(new GridBagLayout());
 		
+		this.setOpaque(true);
+		this.setBackground(Mycolors.greyblue.getColor());
+		
 		GridBagConstraints c = new GridBagConstraints();
-		c.insets = new Insets(10,10,10,10);
+		c.insets = new Insets(10,10,10,10);		
 		
 		Dimension n = new Dimension(150,30);
 		
@@ -26,6 +32,7 @@ public class Menu extends JPanel{
 		JRadioButton easy = new JRadioButton("Easy", true);
 		easy.setName("easy");
 		easy.setFocusable(false);
+		easy.setBackground(Mycolors.greyblue.getColor());
 		bg.add(easy);
 		c.gridy = 1;
 		this.add(easy, c);
@@ -34,6 +41,7 @@ public class Menu extends JPanel{
 		JRadioButton medium = new JRadioButton("Medium");
 		medium.setName("medium");
 		medium.setFocusable(false);
+		medium.setBackground(Mycolors.greyblue.getColor());
 		bg.add(medium);
 		c.gridy = 1;
 		c.gridx = 1;
@@ -43,32 +51,13 @@ public class Menu extends JPanel{
 		JRadioButton hard = new JRadioButton("Hard");
 		hard.setName("hard");
 		hard.setFocusable(false);
+		hard.setBackground(Mycolors.greyblue.getColor());
 		bg.add(hard);
 		c.gridy = 1;
 		c.gridx = 2;
 		this.add(hard, c);
 		hard.addActionListener(Game.getGame());
-		
-		/*Button easy = new Button(Mycolors.green.getColor(), "easy", "easy");
-		easy.setPreferredSize(n);
-		c.gridy = 1;
-		this.add(easy, c);
-		easy.addActionListener(Game.getGame());
-		
-		Button medium = new Button(Mycolors.green.getColor(), "medium", "medium");
-		medium.setPreferredSize(n);
-		c.gridy = 1;
-		c.gridx = 1;
-		this.add(medium, c);
-		medium.addActionListener(Game.getGame());
-		
-		Button hard = new Button(Mycolors.green.getColor(), "hard", "hard");
-		hard.setPreferredSize(n);
-		c.gridy = 1;
-		c.gridx = 2;
-		this.add(hard, c);
-		hard.addActionListener(Game.getGame());*/
-		
+				
 		JLabel jlab = new JLabel("Difficulty :");
 		c.gridy = 0;
 		c.gridx = 1;
@@ -84,27 +73,60 @@ public class Menu extends JPanel{
 		c.gridy = 3;
 		c.gridx = 1;
 		this.add(oneplayer, c);
-		oneplayer.addActionListener(Game.getGame());
+		//oneplayer.addActionListener(Game.getGame());
 		
 		Button twoplayers = new Button(Mycolors.purple.getColor(), "twoplayers", "Two Players");
 		twoplayers.setPreferredSize(n);
 		c.gridy = 4;
 		c.gridx = 1;
 		this.add(twoplayers, c);
-		twoplayers.addActionListener(Game.getGame());
 		
 		Button threeplayers = new Button(Mycolors.purple.getColor(), "threeplayers", "Three Players");
 		threeplayers.setPreferredSize(n);
 		c.gridy = 5;
 		this.add(threeplayers, c);
-		threeplayers.addActionListener(Game.getGame());
 		
 		Button fourplayers = new Button(Mycolors.purple.getColor(), "fourplayers", "Four Players");
 		fourplayers.setPreferredSize(n);
 		c.gridy = 6;
 		this.add(fourplayers, c);
-		fourplayers.addActionListener(Game.getGame());
 		
 	}
-
+	
+	public void paintComponent(Graphics g){
+		
+		super.paintComponent(g);
+		
+		int rand = (int)(Math.random()*6);
+		Color color;
+		
+		switch(rand){
+		case 0:
+			color = Mycolors.purple.getColor();
+			break;
+		case 1:
+			color = Mycolors.red.getColor();
+			break;
+		case 2:
+			color = Mycolors.green.getColor();
+			break;
+		case 3:
+			color = Mycolors.blue.getColor();
+			break;
+		case 4:
+			color = Mycolors.yellow.getColor();
+			break;
+		case 5:
+			color = Mycolors.orange.getColor();
+			break;
+		default :
+			color = Mycolors.orange.getColor();
+			break;
+		}
+		
+		g.setColor(color);
+		g.setFont(new Font("Tahoma", Font.BOLD, 60));
+		g.drawString("COLOR GAME", 200, 80);
+		
+	}
 }

@@ -30,23 +30,24 @@ public class GameBoard extends JPanel{
 		}
 		
 		g.setColor(new Color(0,0,0,50));
+		g.setFont(new Font("SansSerif", Font.BOLD, 20));
 
 		if(Game.getGame().getNbofplayers() == 4){
-			g.drawString("4", size + size/2, Game.getGame().getPixels().getWidth()*size + size/2);
-			g.drawString("3", Game.getGame().getPixels().getHeight()*size + size/2, size+size/2);
-			g.drawString("2", Game.getGame().getPixels().getHeight()*size + size/2, Game.getGame().getPixels().getWidth()*size + size/2);
-			g.drawString("1", size + size/2, size + size/2);
+			g.drawString("4", size + size/2 -5, Game.getGame().getPixels().getWidth()*size + size/2 +10);
+			g.drawString("3", Game.getGame().getPixels().getHeight()*size + size/2 -5, size+size/2 +10);
+			g.drawString("2", Game.getGame().getPixels().getHeight()*size + size/2 -5, Game.getGame().getPixels().getWidth()*size + size/2 +10);
+			g.drawString("1", size + size/2 -5 , size + size/2 +10);
 		}
 
 		if(Game.getGame().getNbofplayers() == 3){
-			g.drawString("3", Game.getGame().getPixels().getHeight()*size + size/2, size+size/2);
-			g.drawString("2", Game.getGame().getPixels().getHeight()*size + size/2, Game.getGame().getPixels().getWidth()*size + size/2);
-			g.drawString("1", size + size/2, size + size/2);
+			g.drawString("3", Game.getGame().getPixels().getHeight()*size + size/2 -5, size+size/2 +10);
+			g.drawString("2", Game.getGame().getPixels().getHeight()*size + size/2 -5, Game.getGame().getPixels().getWidth()*size + size/2 +10);
+			g.drawString("1", size + size/2 -5 , size + size/2 +10);
 		}
 		
 		if(Game.getGame().getNbofplayers() == 2){
-			g.drawString("2", Game.getGame().getPixels().getHeight()*size + size/2, Game.getGame().getPixels().getWidth()*size + size/2);
-			g.drawString("1", size + size/2, size + size/2);
+			g.drawString("2", Game.getGame().getPixels().getHeight()*size + size/2 -5, Game.getGame().getPixels().getWidth()*size + size/2 +10);
+			g.drawString("1", size + size/2 -5 , size + size/2 +10);
 		}
 		
 	}

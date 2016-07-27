@@ -1,5 +1,5 @@
-import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -14,7 +14,7 @@ public class GameOver extends JPanel{
 		
 		super(new GridBagLayout());
 		
-		this.setBackground(new Color(0,0,0,0));
+		this.setBackground(Mycolors.greyblue.getColor());
 		
 		GridBagConstraints c = new GridBagConstraints();
 		c.insets = new Insets(5,5,5,5);
@@ -22,7 +22,9 @@ public class GameOver extends JPanel{
 		c.gridy = 0;
 		
 		JLabel winlab = new JLabel("You win !");
+		winlab.setFont(new Font("Tahoma", Font.BOLD, 20));
 		JLabel looselab = new JLabel("You loose...");
+		looselab.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
 		int winner = Game.getGame().getPixels().getCount();
 		if(winner == 1)
@@ -30,7 +32,8 @@ public class GameOver extends JPanel{
 		else
 			winner--;
 		
-		JLabel playerwin = new JLabel("Player " + winner + " win !!");
+		JLabel playerwin = new JLabel("Player " + winner + " win !");
+		playerwin.setFont(new Font("Tahoma", Font.BOLD, 20));
 		
 		if(Game.getGame().getPixels().isWinning() && Game.getGame().getNbofplayers() > 1)
 			this.add(playerwin, c);

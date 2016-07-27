@@ -1,6 +1,7 @@
 import java.awt.CardLayout;
 import java.awt.Dimension;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -23,6 +24,8 @@ public class Frame extends JFrame{
 		setResizable(false);
 		setFocusable(true);
 		
+		this.setIconImage((new ImageIcon(getClass().getResource("/logo2.png"))).getImage());
+		
 		cl = new CardLayout();
 		content = new JPanel();
 		content.setLayout(cl);
@@ -31,7 +34,8 @@ public class Frame extends JFrame{
 		menu = new Menu();
 		
 		content.add(menu, "Menu");
-		this.getContentPane().add(content);
+		content.add(board, "Board");
+		this.add(content);
 		
 	}
 	

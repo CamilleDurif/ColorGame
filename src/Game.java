@@ -1,7 +1,6 @@
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
 
 import javax.swing.AbstractButton;
 
@@ -15,7 +14,6 @@ public class Game implements ActionListener{
 	private int count;
 	private String difficulty;
 	private int nbofplayers;
-	
 	private String name;
 	
 	public Game(){
@@ -26,8 +24,7 @@ public class Game implements ActionListener{
 		frame.setVisible(true);
 
 		difficulty = "easy";
-		//count = 20;
-		
+		nbofplayers = 1;
 	}
 	
 	public void checkWin(){
@@ -60,28 +57,32 @@ public class Game implements ActionListener{
 			setLevel(difficulty);
 		}
 		
+		
 		if(name == "twoplayers"){
 			nbofplayers = 2;
 			setLevel(difficulty);
-			pixels.setCount(1);
 		}
 		
 		if(name == "threeplayers"){
 			nbofplayers = 3;
 			setLevel(difficulty);
-			pixels.setCount(1);
 		}
 		
 		if(name == "fourplayers"){
 			nbofplayers = 4;
 			setLevel(difficulty);
-			pixels.setCount(1);
 		}
 		
 		if(name == "tryagain"){
-			pixels.setCount(count);
+			if(nbofplayers == 1)
+				pixels.setCount(count);
 			pixels.initColors();
 			frame.newGame();
+		}
+		
+		if(nbofplayers != 1){
+			int rand = (int)(Math.random()*nbofplayers)+1;
+			pixels.setCount(rand);
 		}
 		
 		if(name == "menu"){
@@ -89,7 +90,9 @@ public class Game implements ActionListener{
 		}
 		
 		if(name == "exit")
-			frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+			//TODO
+			//voir la différence entre ces deux
+			System.exit(0);//frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
 		
 	}
 	
@@ -130,8 +133,6 @@ public class Game implements ActionListener{
 				return;
 			pixels.checkAdj(newcolor, oldcolor, 0, 0);
 			pixels.setColor(newcolor, 0, 0);
-			//TODO
-			//pourquoi ?
 			pixels.setCount(pixels.getCount()-1);
 		}
 		
@@ -236,8 +237,8 @@ public class Game implements ActionListener{
 			count = 21;
 		}
 		else if(difficulty == "hard"){
-			pixels = new Pixels(25,16,30,50);
-			count = 50;
+			pixels = new Pixels(25,16,30,33);
+			count = 33;
 		}
 		
 		frame.newGame();

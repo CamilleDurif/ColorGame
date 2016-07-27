@@ -99,51 +99,35 @@ public class Pixels {
 		return colors;
 	}
 
-
-
-	public int getHeight() {
+	public int getHeight(){
 		return height;
 	}
 
-
-
-	public void setHeight(int height) {
+	public void setHeight(int height){
 		this.height = height;
 	}
 
-
-
-	public int getWidth() {
+	public int getWidth(){
 		return width;
 	}
 
-
-
-	public void setWidth(int width) {
+	public void setWidth(int width){
 		this.width = width;
 	}
 
-
-
-	public int getSize() {
+	public int getSize(){
 		return size;
 	}
-
-
-
-	public void setSize(int size) {
+	
+	public void setSize(int size){
 		this.size = size;
 	}
-
-
-
-	public int getCount() {
+	
+	public int getCount(){
 		return count;
 	}
-
-
-
-	public void setCount(int count) {
+	
+	public void setCount(int count){
 		this.count = count;
 	}
 	
