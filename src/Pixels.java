@@ -10,8 +10,8 @@ public class Pixels {
 	
 	private int height;
 	private int width;
-	private int size;
-	private int count;
+	private int size; //size of the squares, in pixels
+	private int count; //defines the number of turns left or the number of the player who will play
 	
 	/*
 	 * The size, the number of squares and the count for the current game is given

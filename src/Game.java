@@ -15,10 +15,10 @@ public class Game implements ActionListener{
 	private Frame frame;
 	private Pixels pixels;
 	
-	private int count;
+	private int count; //defines the number of turns left or the number of the player who will play
 	private String difficulty;
-	private int nbofplayers;
-	private String name;
+	private int nbofplayers; 
+	private String name; //name is used to get the name of a button 
 	
 	public Game(){
 		
