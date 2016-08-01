@@ -1,5 +1,9 @@
 import java.awt.Color;
 
+/*
+ * This enum is used to define custom and use them only by their name 
+ * and not the RGB code every time
+ */
 public enum Mycolors {
 
 	blue (new Color(108,166,233)),

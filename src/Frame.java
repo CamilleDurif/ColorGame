@@ -5,6 +5,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+/*
+ * The main frame contains all the JPanel used to display the game.
+ * In order to show the panels, a CardLayout is used to switch from a view to another.
+ */
 @SuppressWarnings("serial")
 public class Frame extends JFrame{
 	

@@ -1,14 +1,22 @@
 import java.awt.Color;
 
+/*
+ * This class manages the colors of the board throughout the game.
+ * The colors are stored in a 2D array that represents the board, each case is a square.
+ */
 public class Pixels {
 	
-	private Color[][] colors;
+	private Color[][] colors; //the 2D arrays of colors
 	
 	private int height;
 	private int width;
 	private int size;
 	private int count;
 	
+	/*
+	 * The size, the number of squares and the count for the current game is given
+	 * at the initialization of the game in the Game class.
+	 */
 	public Pixels(int x, int y, int z, int count){
 		
 		colors = new Color[x][y];
@@ -22,26 +30,38 @@ public class Pixels {
 		
 	}	
 	
+	/*
+	 * This method is the core of the game.
+	 * When the player click on a command button, the top left square
+	 * and all the consecutive square of the same color too.
+	 * To optimize the game, the method does not check all the cells of the array every time.
+	 * From the first square, if a square on the left, top, right or right is the same color, 
+	 * this square get the new color and the method check the neighbors of this square.
+	 */
 	public void checkAdj(Color newcolor, Color oldcolor, int i, int j){
 		
-		if(j+1<width && colors[i][j+1] == oldcolor){
-			colors[i][j+1] = newcolor;
-			checkAdj(newcolor, oldcolor, i, j+1);
+		//check right square
+		if(j+1<width && colors[i][j+1] == oldcolor){ //if this square is the same color of the checked square
+			colors[i][j+1] = newcolor; //the color is changed to the new color
+			checkAdj(newcolor, oldcolor, i, j+1); //then we check the consecutive square of this changed square
 			
 		}
 		
+		//check bottom square
 		if(i+1<height && colors[i+1][j] == oldcolor){
 			colors[i+1][j] = newcolor;
 			checkAdj(newcolor, oldcolor, i+1, j);
 			
 		}
 		
+		//check left square
 		if(j-1>=0 && colors[i][j-1] == oldcolor){
 			colors[i][j-1] = newcolor;
 			checkAdj(newcolor, oldcolor, i, j-1);
 			
 		}
 		
+		//check tom square
 		if(i-1>=0 && colors[i-1][j] == oldcolor){
 			colors[i-1][j] = newcolor;
 			checkAdj(newcolor, oldcolor, i-1, j);
@@ -49,6 +69,10 @@ public class Pixels {
 		}
 	}
 	
+	/*
+	 * This function check all the cells of the array and return at the 
+	 * moment it meets a different color than the first one.
+	 */
 	public boolean isWinning(){
 		
 		for(int i=0; i<height; i++){
@@ -57,14 +81,23 @@ public class Pixels {
 					return false;
 			}
 		}
+		
 		return true;
 	}
 	
+	/*
+	 * This function is used to change the color of a specific cell.
+	 * In the recursive method checkAlign, we don't change the color of the first cell checked.
+	 */
 	public void setColor(Color newcolor, int x, int y){
 		colors[x][y] = newcolor;
 	}
 	
-	
+	/*
+	 * This function initialize the array with random colors.
+	 * As there is only 6 colors, there is little risk that the puzzle
+	 * will be impossible to finish with the number of turn defined (count).
+	 */
 	public void initColors(){
 		
 		for(int i=0;i<height;i++){

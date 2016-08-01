@@ -3,6 +3,11 @@ import java.awt.Dimension;
 
 import javax.swing.JButton;
 
+/*
+ * This class is used to make personalized buttons more easily.
+ * The class contains two constructors, one for the command button (the ones used to control the game)
+ * and the menu buttons with text on it.
+ */
 @SuppressWarnings("serial")
 public class Button extends JButton{
 	

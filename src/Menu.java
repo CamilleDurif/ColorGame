@@ -11,6 +11,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
+/*
+ * JPanel to set the menu of the game
+ * There is two different options : the difficulty of the game (easy, medium or hard)
+ * and the number of players from one to four.
+ * The difficulty changes the number and the size of the squares.
+ * A GridBagLayout is used for the components.
+ */
 @SuppressWarnings("serial")
 public class Menu extends JPanel{
 	
@@ -27,6 +34,10 @@ public class Menu extends JPanel{
 		
 		Dimension n = new Dimension(150,30);
 		
+		/*
+		 * The players can only choose one level of difficulty
+		 * so the JRadioButtons are grouper in a Button Group.
+		 */
 		ButtonGroup bg = new ButtonGroup();
 		
 		JRadioButton easy = new JRadioButton("Easy", true);
@@ -68,12 +79,15 @@ public class Menu extends JPanel{
 		c.gridx = 1;
 		this.add(jlab2, c);
 		
+		/*
+		 * Four different buttons to choose the number of players
+		 * When the player click on a button, the game starts.
+		 */
 		Button oneplayer = new Button(Mycolors.purple.getColor(), "oneplayer", "Single Player");
 		oneplayer.setPreferredSize(n);
 		c.gridy = 3;
 		c.gridx = 1;
 		this.add(oneplayer, c);
-		//oneplayer.addActionListener(Game.getGame());
 		
 		Button twoplayers = new Button(Mycolors.purple.getColor(), "twoplayers", "Two Players");
 		twoplayers.setPreferredSize(n);
@@ -93,6 +107,10 @@ public class Menu extends JPanel{
 		
 	}
 	
+	/*
+	 * This method is used to display the title of the game.
+	 * Because the game is based on color change, the color of the title is randomly selected.
+	 */
 	public void paintComponent(Graphics g){
 		
 		super.paintComponent(g);

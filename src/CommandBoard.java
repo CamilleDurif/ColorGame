@@ -2,6 +2,10 @@ import java.awt.Color;
 
 import javax.swing.JPanel;
 
+/*
+ * The CommandBoard class extends JPanel to make the panel that contains the buttons for the game.
+ * The buttons come from the class Button.
+ */
 @SuppressWarnings("serial")
 public class CommandBoard extends JPanel{
 	

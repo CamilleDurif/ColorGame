@@ -7,6 +7,11 @@ import java.awt.Insets;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/*
+ * The JPanel GameOver is displayed at the end of the game.
+ * It contains a String that changes according to the result of the game and three buttons to navigate in the game.
+ * The components are displayed using a GridBagLayout
+ */
 @SuppressWarnings("serial")
 public class GameOver extends JPanel{
 	
@@ -21,12 +26,16 @@ public class GameOver extends JPanel{
 		
 		c.gridy = 0;
 		
-		JLabel winlab = new JLabel("You win !");
+		JLabel winlab = new JLabel("You win !"); //in single mode, when the player wins
 		winlab.setFont(new Font("Tahoma", Font.BOLD, 20));
-		JLabel looselab = new JLabel("You loose...");
+		JLabel looselab = new JLabel("You loose..."); // in single mode, when the player loses
 		looselab.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
-		int winner = Game.getGame().getPixels().getCount();
+		/*
+		 * In multiplayer, the count is used to defines which player has to play
+		 * Then, at the end of the game, the winner is the last player who played minus one.
+		 */
+		int winner = Game.getGame().getPixels().getCount(); 
 		if(winner == 1)
 			winner = Game.getGame().getNbofplayers();
 		else
@@ -44,19 +53,16 @@ public class GameOver extends JPanel{
 		
 		Button tryagain = new Button(Mycolors.blue.getColor(), "tryagain", "Try Again");
 		tryagain.setPreferredSize(new Dimension(150,30));
-		tryagain.addActionListener(Game.getGame());
 		c.gridy = 1;
 		this.add(tryagain, c);
 		
 		Button menu = new Button(Mycolors.green.getColor(), "menu", "Menu");
 		menu.setPreferredSize(new Dimension(150,30));
-		menu.addActionListener(Game.getGame());
 		c.gridy = 2;
 		this.add(menu, c);
 		
 		Button exit = new Button(Mycolors.red.getColor(), "exit", "Exit");
 		exit.setPreferredSize(new Dimension(150,30));
-		exit.addActionListener(Game.getGame());
 		c.gridy = 3;
 		this.add(exit, c);
 	}

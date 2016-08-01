@@ -4,9 +4,13 @@ import java.awt.event.ActionListener;
 
 import javax.swing.AbstractButton;
 
+/*
+ * The Game class is the core of the game, it manages the actions for every button,
+ * the upgrade of the board, the panel change, etc
+ */
 public class Game implements ActionListener{
 
-	static Game game;
+	private static Game game;
 	
 	private Frame frame;
 	private Pixels pixels;
@@ -23,10 +27,16 @@ public class Game implements ActionListener{
 		frame = new Frame();
 		frame.setVisible(true);
 
-		difficulty = "easy";
+		difficulty = "easy"; //default value 
 		nbofplayers = 1;
 	}
 	
+	/*
+	 * After every color change, this method is used to verify if the game is finished or not
+	 * There is two cases for the game to finish :
+	 * either the board is in one color (pixels.isWinning())
+	 * or, in single player, the count is equal to 0 (pixels.getCount() <= 0 && nbofplayers == 1)
+	 */
 	public void checkWin(){
 		
 		if((pixels.getCount() <= 0 && nbofplayers == 1) || pixels.isWinning())
@@ -34,6 +44,10 @@ public class Game implements ActionListener{
 		
 	}
 	
+	/*
+	 * The management of the button is divided in two functions : one for the menu button
+	 * and one for the command color buttons. 
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e){
 		
@@ -49,14 +63,15 @@ public class Game implements ActionListener{
 	
 	public void menubutton(){
 		
+		//set the difficulty of the game
 		if(name == "easy" || name == "medium" || name == "hard")
 			difficulty = name;
 		
+		//set the number of players then launch the game with the difficulty previously selected
 		if(name == "oneplayer"){
 			nbofplayers = 1;
 			setLevel(difficulty);
 		}
-		
 		
 		if(name == "twoplayers"){
 			nbofplayers = 2;
@@ -73,6 +88,7 @@ public class Game implements ActionListener{
 			setLevel(difficulty);
 		}
 		
+		//launch a new game, reset the count in single player mode
 		if(name == "tryagain"){
 			if(nbofplayers == 1)
 				pixels.setCount(count);
@@ -80,6 +96,7 @@ public class Game implements ActionListener{
 			frame.newGame();
 		}
 		
+		//in multiplayer, the first player is randomly selected
 		if(nbofplayers != 1){
 			int rand = (int)(Math.random()*nbofplayers)+1;
 			pixels.setCount(rand);
@@ -127,15 +144,18 @@ public class Game implements ActionListener{
 		
 		Color oldcolor;
 		
+		//in single player mode
 		if(nbofplayers == 1){
+			//oldcolor is the color of the top-left square
 			oldcolor = pixels.getColors()[0][0];
 			if(oldcolor == newcolor)
 				return;
-			pixels.checkAdj(newcolor, oldcolor, 0, 0);
-			pixels.setColor(newcolor, 0, 0);
-			pixels.setCount(pixels.getCount()-1);
+			pixels.checkAdj(newcolor, oldcolor, 0, 0); //change the color of the consecutive squares
+			pixels.setColor(newcolor, 0, 0); // change the color of the first square
+			pixels.setCount(pixels.getCount()-1); //the count is decremented
 		}
 		
+		//in multiplayer mode
 		if(nbofplayers == 2){
 			if(pixels.getCount() == 1){
 				oldcolor = pixels.getColors()[0][0];
@@ -146,12 +166,13 @@ public class Game implements ActionListener{
 				pixels.setCount(pixels.getCount()+1);
 			}
 			else{
+				//for the second player, the oldcolor is the color of the bottom-right square
 				oldcolor = pixels.getColors()[pixels.getHeight()-1][pixels.getWidth()-1];
 				if(oldcolor == newcolor)
 					return;
 				pixels.checkAdj(newcolor, oldcolor, pixels.getHeight()-1, pixels.getWidth()-1);
 				pixels.setColor(newcolor, pixels.getHeight()-1, pixels.getWidth()-1);
-				pixels.setCount(pixels.getCount()-1);
+				pixels.setCount(pixels.getCount()-1); //the count is used to show which player turn it is
 			}
 		}
 		
@@ -226,6 +247,10 @@ public class Game implements ActionListener{
 		
 	}
 	
+	/*
+	 * The three level of difficulty are differentiate by :
+	 * the number of squares, their size and the count
+	 */
 	public void setLevel(String difficulty){
 		
 		if(difficulty == "easy"){
